@@ -67,8 +67,8 @@ for kabkot_asal in down:
         for url in url_list:
             threads.append(executor.submit(download, url))
             
-        for task in as_completed(threads):
-            results.append(task.result())
+            for task in as_completed(threads):
+                results.append(task.result())
                 
     df = pd.concat(results)
     

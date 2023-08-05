@@ -2,6 +2,7 @@ import requests
 import pandas as pd
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
+from urllib3.exceptions import InsecureRequestWarning
 from datetime import datetime
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from io import StringIO
@@ -28,6 +29,7 @@ retries = Retry(
 	status_forcelist = [429, 500, 502, 503, 504] 
 )
 requests_session.mount("https://", HTTPAdapter(max_retries=retries)) 
+requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
 
 def download(url):
     try:
